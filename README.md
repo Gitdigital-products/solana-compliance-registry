@@ -1,4 +1,6 @@
-## Solana-goverance-policy-engine README.md
+# Solana Compliance Registry README.md
+
+## Solana-goverance-policy-engine 
 
 Suggested structure:
 
