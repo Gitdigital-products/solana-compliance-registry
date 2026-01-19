@@ -4,7 +4,7 @@
 
 Suggested structure:
 
-`bash
+bash
 solana-governance-policy-engine/
 ├── README.md
 ├── GOVERNANCE.md
