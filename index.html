@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Solana Compliance Registry</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="description"
+    content="A public, versioned registry of Solana compliance and governance artifacts: KYC providers, AML rule sets, policy templates, and audit trails."
+  />
+  <style>
+    :root {
+      --bg: #050814;
+      --bg-alt: #0b1020;
+      --card: #11182b;
+      --accent: #15f2a4;
+      --accent-soft: rgba(21, 242, 164, 0.12);
+      --text: #f5f7ff;
+      --muted: #9aa4c6;
+      --border: #1f2940;
+      --danger: #ff4b6a;
+      --shadow-soft: 0 18px 45px rgba(0, 0, 0, 0.55);
+      --radius-lg: 18px;
+      --radius-md: 10px;
+      --radius-pill: 999px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+        "Segoe UI", sans-serif;
+      background: radial-gradient(circle at top, #151b3a 0, #050814 55%);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      align-items: stretch;
+      justify-content: center;
+      padding: 32px 16px;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 1120px;
+      background: linear-gradient(145deg, #050814 0, #050814 40%, #0b1020 100%);
+      border-radius: 28px;
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      box-shadow: var(--shadow-soft);
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2.4fr);
+      overflow: hidden;
+    }
+
+    @media (max-width: 900px) {
+      .shell {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .left {
+      padding: 28px 28px 24px 28px;
+      border-right: 1px solid rgba(255, 255, 255, 0.04);
+    }
+
+    @media (max-width: 900px) {
+      .left {
+        border-right: none;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      }
+    }
+
+    .right {
+      padding: 24px 24px 20px 24px;
+      background: radial-gradient(circle at top right, #1a2344 0, #050814 55%);
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      border: 1px solid rgba(21, 242, 164, 0.4);
+      background: linear-gradient(
+        120deg,
+        rgba(21, 242, 164, 0.16),
+        rgba(21, 242, 164, 0.04)
+      );
+      color: var(--accent);
+    }
+
+    .badge-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 12px rgba(21, 242, 164, 0.9);
+    }
+
+    .badge-secondary {
+      border-color: rgba(154, 164, 198, 0.5);
+      color: var(--muted);
+      background: rgba(11, 16, 32, 0.9);
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.2;
+      margin-bottom: 8px;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      font-size: 13px;
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .meta-pill {
+      font-size: 11px;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .meta-pill strong {
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .meta-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 999px;
+      background: var(--muted);
+    }
+
+    .cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .btn {
+      border-radius: var(--radius-pill);
+      padding: 9px 18px;
+      font-size: 13px;
+      font-weight: 500;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.16s ease-out;
+      text-decoration: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #15f2a4, #4df2c3);
+      color: #02040a;
+      box-shadow: 0 10px 28px rgba(21, 242, 164, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 14px 34px rgba(21, 242, 164, 0.45);
+    }
+
+    .btn-ghost {
+      background: rgba(5, 8, 20, 0.9);
+      border-color: var(--border);
+      color: var(--muted);
+    }
+
+    .btn-ghost:hover {
+      border-color: rgba(154, 164, 198, 0.7);
+      color: var(--text);
+      background: rgba(11, 16, 32, 0.9);
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    .divider {
+      height: 1px;
+      background: radial-gradient(
+        90deg,
+        rgba(21, 242, 164, 0.4),
+        rgba(21, 242, 164, 0)
+      );
+      margin-bottom: 18px;
+      opacity: 0.7;
+    }
+
+    .section-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    @media (max-width: 600px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .card {
+      background: radial-gradient(circle at top left, #1a2344 0, #11182b 55%);
+      border-radius: var(--radius-md);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 10px 11px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(
+        circle at top right,
+        rgba(21, 242, 164, 0.16),
+        transparent 55%
+      );
+      opacity: 0.6;
+      pointer-events: none;
+    }
+
+    .card-title {
+      font-size: 12px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .card-body {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 6px;
+    }
+
+    .card-tag-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      font-size: 10px;
+    }
+
+    .card-tag {
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      background: rgba(5, 8, 20, 0.9);
+      border: 1px solid rgba(154, 164, 198, 0.4);
+      color: var(--muted);
+    }
+
+    .card-tag-accent {
+      border-color: rgba(21, 242, 164, 0.6);
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .status-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--muted);
+      margin-bottom: 6px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 9px;
+      border-radius: var(--radius-pill);
+      background: rgba(5, 8, 20, 0.9);
+      border: 1px solid rgba(21, 242, 164, 0.5);
+      color: var(--accent);
+      font-size: 10px;
+    }
+
+    .status-pill-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 999px;
+      background: var(--accent);
+      box-shadow: 0 0 10px rgba(21, 242, 164, 0.9);
+    }
+
+    .status-meta {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .log {
+      background: #050814;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      padding: 10px;
+      font-family: "SF Mono", ui-monospace, Menlo, Monaco, Consolas,
+        "Liberation Mono", "Courier New", monospace;
+      font-size: 11px;
+      color: var(--muted);
+      height: 150px;
+      overflow-y: auto;
+      line-height: 1.5;
+    }
+
+    .log-line {
+      white-space: pre-wrap;
+      margin-bottom: 2px;
+    }
+
+    .log-line span {
+      color: var(--accent);
+    }
+
+    .log-line.error span {
+      color: var(--danger);
+    }
+
+    .form {
+      margin-top: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .field-label {
+      font-size: 11px;
+      color: var(--muted);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .field-label span {
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .field-input {
+      width: 100%;
+      padding: 7px 9px;
+      border-radius: 9px;
+      border: 1px solid var(--border);
+      background: rgba(5, 8, 20, 0.9);
+      color: var(--text);
+      font-size: 12px;
+      outline: none;
+      transition: border-color 0.14s ease-out, box-shadow 0.14s ease-out;
+    }
+
+    .field-input:focus {
+      border-color: rgba(21, 242, 164, 0.7);
+      box-shadow: 0 0 0 1px rgba(21, 242, 164, 0.4);
+    }
+
+    .field-input::placeholder {
+      color: rgba(154, 164, 198, 0.7);
+    }
+
+    .form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    .hint {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .hint strong {
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .pill-mini {
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: var(--radius-pill);
+      border: 1px solid rgba(154, 164, 198, 0.5);
+      color: var(--muted);
+    }
+
+    .pill-mini strong {
+      color: var(--text);
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <section class="left">
+      <div class="badge-row">
+        <div class="badge">
+          <span class="badge-dot"></span>
+          <span>Solana Compliance Registry</span>
+        </div>
+        <div class="badge badge-secondary">
+          <span>Public, versioned governance artifacts</span>
+        </div>
+      </div>
+
+      <h1>Institutional-grade Solana compliance registry</h1>
+      <p class="subtitle">
+        Centralize KYC providers, AML rule sets, policy templates, and audit
+        artifacts in a single, versioned registry designed for real-world
+        Solana deployments.
+      </p>
+
+      <div class="meta-row">
+        <div class="meta-pill">
+          <strong>Stack</strong>
+          <span class="meta-dot"></span>
+          <span>Solana · Rust · TypeScript</span>
+        </div>
+        <div class="meta-pill">
+          <strong>Focus</strong>
+          <span class="meta-dot"></span>
+          <span>KYC / AML · Governance · Audit</span>
+        </div>
+        <div class="meta-pill">
+          <strong>License</strong>
+          <span class="meta-dot"></span>
+          <span>MIT</span>
+        </div>
+      </div>
+
+      <div class="cta-row">
+        <a
+          class="btn btn-primary"
+          href="https://github.com/Gitdigital-products/solana-compliance-registry"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span class="btn-icon">↗</span>
+          <span>Open Registry Repository</span>
+        </a>
+        <button class="btn btn-ghost" id="simulateSync">
+          <span class="btn-icon">⟳</span>
+          <span>Simulate Registry Sync</span>
+        </button>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="section-title">Registry surfaces</div>
+      <div class="grid">
+        <article class="card">
+          <div class="card-title">KYC provider catalog</div>
+          <div class="card-body">
+            Maintain a curated list of approved KYC providers, jurisdictions,
+            and integration metadata for on-chain enforcement.
+          </div>
+          <div class="card-tag-row">
+            <span class="card-tag card-tag-accent">Provider IDs</span>
+            <span class="card-tag">Jurisdiction matrix</span>
+            <span class="card-tag">API metadata</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">AML rule sets</div>
+          <div class="card-body">
+            Versioned AML rule packs mapped to token programs, risk tiers, and
+            regulatory regimes.
+          </div>
+          <div class="card-tag-row">
+            <span class="card-tag card-tag-accent">Rule packs</span>
+            <span class="card-tag">Risk tiers</span>
+            <span class="card-tag">Change history</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">Policy templates</div>
+          <div class="card-body">
+            Standardized policy templates for issuers, custodians, and
+            marketplaces aligned with Solana-native controls.
+          </div>
+          <div class="card-tag-row">
+            <span class="card-tag">Issuer policies</span>
+            <span class="card-tag">Custodian SLAs</span>
+            <span class="card-tag card-tag-accent">Audit-ready</span>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="card-title">Audit artifacts</div>
+          <div class="card-body">
+            Signed attestations, control mappings, and evidence bundles for
+            regulators and institutional partners.
+          </div>
+          <div class="card-tag-row">
+            <span class="card-tag">Attestations</span>
+            <span class="card-tag">Control mappings</span>
+            <span class="card-tag card-tag-accent">Evidence bundles</span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="right">
+      <div class="status-row">
+        <div class="status-pill">
+          <span class="status-pill-dot"></span>
+          <span id="statusLabel">Registry status: idle</span>
+        </div>
+        <div class="status-meta" id="statusMeta">
+          Last sync: not yet started
+        </div>
+      </div>
+
+      <div class="log" id="log">
+        <div class="log-line">
+          $ solana-compliance-registry sync --dry-run
+        </div>
+        <div class="log-line">
+          waiting for first request from <span>frontend</span>…
+        </div>
+      </div>
+
+      <form class="form" id="registryForm">
+        <label class="field-label" for="registryId">
+          <span>Registry ID</span>
+          <code style="font-size: 10px; color: var(--muted);">
+            e.g. mainnet-rwa-v1
+          </code>
+        </label>
+        <input
+          class="field-input"
+          id="registryId"
+          name="registryId"
+          type="text"
+          placeholder="mainnet-rwa-v1"
+          required
+        />
+
+        <label class="field-label" for="environment">
+          <span>Environment</span>
+          <span class="pill-mini">
+            <strong>Default:</strong>&nbsp;devnet
+          </span>
+        </label>
+        <input
+          class="field-input"
+          id="environment"
+          name="environment"
+          type="text"
+          placeholder="devnet | testnet | mainnet-beta"
+        />
+
+        <div class="form-footer">
+          <p class="hint">
+            Submitting will call a <strong>/sync-registry</strong> endpoint on
+            your Python backend.
+          </p>
+          <button type="submit" class="btn btn-primary">
+            <span class="btn-icon">▶</span>
+            <span>Call Python backend</span>
+          </button>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <script>
+    const logEl = document.getElementById("log");
+    const statusLabelEl = document.getElementById("statusLabel");
+    const statusMetaEl = document.getElementById("statusMeta");
+    const simulateSyncBtn = document.getElementById("simulateSync");
+    const registryForm = document.getElementById("registryForm");
+
+    function appendLog(message, type = "info") {
+      const line = document.createElement("div");
+      line.className = "log-line" + (type === "error" ? " error" : "");
+      line.innerHTML = message;
+      logEl.appendChild(line);
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function setStatus(label, meta) {
+      statusLabelEl.textContent = label;
+      statusMetaEl.textContent = meta;
+    }
+
+    simulateSyncBtn.addEventListener("click", () => {
+      const now = new Date().toLocaleTimeString();
+      appendLog(
+        `<span>[${now}]</span> dry-run sync: scanning KYC providers…`
+      );
+      setStatus("Registry status: syncing (dry-run)", `Last sync: ${now}`);
+
+      setTimeout(() => {
+        appendLog(
+          `<span>[${new Date().toLocaleTimeString()}]</span> loaded 12 KYC providers, 4 AML rule packs, 3 policy templates`
+        );
+      }, 700);
+
+      setTimeout(() => {
+        appendLog(
+          `<span>[${new Date().toLocaleTimeString()}]</span> dry-run complete — no breaking changes detected`
+        );
+        setStatus(
+          "Registry status: healthy",
+          `Last sync (simulated): ${new Date().toLocaleTimeString()}`
+        );
+      }, 1500);
+    });
+
+    registryForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      const registryId = document.getElementById("registryId").value.trim();
+      const environment =
+        document.getElementById("environment").value.trim() || "devnet";
+
+      if (!registryId) {
+        appendLog(
+          `<span>[${new Date().toLocaleTimeString()}]</span> missing registryId — cannot call backend`,
+          "error"
+        );
+        return;
+      }
+
+      const payload = { registryId, environment };
+      const now = new Date().toLocaleTimeString();
+
+      appendLog(
+        `<span>[${now}]</span> POST /sync-registry payload=${JSON.stringify(
+          payload
+        )}`
+      );
+      setStatus("Registry status: syncing (backend)", `Last sync: pending…`);
+
+      try {
+        const response = await fetch("/sync-registry", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+
+        const data = await response.json().catch(() => ({}));
+
+        if (!response.ok) {
+          throw new Error(data.error || `HTTP ${response.status}`);
+        }
+
+        appendLog(
+          `<span>[${new Date().toLocaleTimeString()}]</span> backend ok: ${JSON.stringify(
+            data
+          )}`
+        );
+        setStatus(
+          "Registry status: healthy",
+          `Last sync (backend): ${new Date().toLocaleTimeString()}`
+        );
+      } catch (error) {
+        appendLog(
+          `<span>[${new Date().toLocaleTimeString()}]</span> backend error: ${
+            error.message || error
+          }`,
+          "error"
+        );
+        setStatus(
+          "Registry status: error",
+          "Last sync: failed — check backend logs"
+        );
+      }
+    });
+  </script>
+</body>
+</html>
