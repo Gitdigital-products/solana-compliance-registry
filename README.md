@@ -1,4 +1,4 @@
-## Solaba-goverance-policy-engine README.md
+## Solana-goverance-policy-engine README.md
 
 Suggested structure:
 
@@ -33,7 +33,7 @@ solana-governance-policy-engine/
 
 README.md (v1 draft):
 ~~
-```markdown
+`markdown
 
 solana-governance-policy-engine
 
@@ -50,7 +50,7 @@ This project treats governance as a first-class, machine-readable artifact. Poli
 ~~
 
 ~~
-```markdown
+`markdown
 Architecture.md
 
 - Quantum layer: Governance policy model and metadata standard.
@@ -136,7 +136,7 @@ Status
 
 
 ~~
-```markdown
+`markdown
 Governance and contributions.md
 
 See [Looks like the result wasn't safe to show. Let's switch things up and try something else!] and [Looks like the result wasn't safe to show. Let's switch things up and try something else!] for project governance, decision-making, and compliance posture.
@@ -148,7 +148,7 @@ You can add badges like:
 !Layer: Micro
 !Domain: Governance
 !Standard: Policy Schema v0.1
-```
+`
 
 
 
