@@ -165,7 +165,7 @@ A compliance layer designed to bridge institutional KYC/AML processes with Solan
 - **Regulatory Alignment:** Eases the adoption of compliant Real-World Asset issuance.
 
 ### Quick Start
-```bash
+``bash
 # Clone the repo
 git clone https://github.com/Gitdigital-products/solana-kyc-compliance-sdk.git
 cd solana-kyc-compliance-sdk
@@ -178,3 +178,7 @@ cargo build-bpf
 cd ../../sdk/typescript
 npm install && npm run build
 Open-source SDK for enforcing KYC/AML compliance directly at the token level on Solana using Token Extensions (Transfer Hook &amp; Permanent Delegate). Includes a Rust on-chain program, TypeScript SDK, and Compliance Registry for institutional-grade Real-World Asset (RWA) issuance.
+``run.py
+pip install flask
+python app.py
+```
