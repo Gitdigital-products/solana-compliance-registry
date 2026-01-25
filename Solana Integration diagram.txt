@@ -1,0 +1,46 @@
+---
+
+# Solana integration diagram
+How the registry plugs into wallets, dApps, DAOs
+
+`txt
+                          ┌─────────────────────────────┐
+                          │  Solana Compliance Registry │
+                          │  (this repo)                │
+                          └─────────────┬───────────────┘
+                                        │
+                                        │  SDKs + CLI + Website
+                                        ▼
+          ┌─────────────────────────────────────────────────────────┐
+          │                 Off‑Chain Integrations                  │
+          ├─────────────────────────────────────────────────────────┤
+          │  • Wallet backends                                     │
+          │  • dApp servers                                        │
+          │  • Indexers / APIs                                     │
+          │  • Compliance dashboards                               │
+          └─────────────┬──────────────────────────────────────────┘
+                        │
+                        │  Use registry to:
+                        │  • Select providers
+                        │  • Enforce policies
+                        ▼
+          ┌─────────────────────────────────────────────────────────┐
+          │                    On‑Chain Layer                       │
+          ├─────────────────────────────────────────────────────────┤
+          │  • Programs read:                                       │
+          │      - Provider IDs                                     │
+          │      - Policy IDs                                       │
+          │  • Governance configs reference registry IDs            │
+          │  • Future: on‑chain registry mirror / oracle            │
+          └─────────────┬──────────────────────────────────────────┘
+                        │
+                        │  Used by
+                        ▼
+          ┌─────────────────────────────────────────────────────────┐
+          │                    End‑User Surfaces                    │
+          ├─────────────────────────────────────────────────────────┤
+          │  • Wallet UIs                                           │
+          │  • dApp frontends                                       │
+          │  • DAO governance UIs                                   │
+          │  • Launchpads / NFT marketplaces                        │
+          └─────────────────────────────────────────────────────────┘
