@@ -1,0 +1,12 @@
+{
+  "id": "chainalysis-aml",
+  "type": "aml_ruleset",
+  "name": "Chainalysis AML Rules",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "risk_levels": ["low", "medium", "high"],
+    "supported_assets": ["SOL", "USDC", "SPL"],
+    "refresh_interval_hours": 24
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "id": "kycdao-kyc",
+  "type": "kyc_provider",
+  "name": "KYCDAO",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "website": "https://kycdao.xyz",
+    "jurisdictions_supported": ["EU"],
+    "verification_methods": ["document"],
+    "solana_integration": true
+  }
+}

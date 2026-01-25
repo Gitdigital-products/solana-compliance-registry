@@ -1,0 +1,11 @@
+{
+  "id": "sanctions-only-policy",
+  "type": "policy",
+  "name": "Sanctions-Only Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Sanctions screening only",
+    "required_sanctions_providers": ["chainalysis-sanctions", "open-sanctions"]
+  }
+}

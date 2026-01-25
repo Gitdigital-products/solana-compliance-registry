@@ -1,0 +1,13 @@
+{
+  "id": "default-kyc-policy",
+  "type": "policy",
+  "name": "Default KYC Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Baseline KYC requirements for Solana dApps",
+    "minimum_age": 18,
+    "required_checks": ["identity", "liveness"],
+    "accepted_providers": ["civic-kyc", "fractal-kyc", "sumsub-kyc"]
+  }
+}

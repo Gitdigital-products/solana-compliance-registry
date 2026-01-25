@@ -1,0 +1,11 @@
+{
+  "id": "open-sanctions",
+  "type": "sanctions_provider",
+  "name": "OpenSanctions",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "lists": ["global"],
+    "refresh_interval_hours": 24
+  }
+}

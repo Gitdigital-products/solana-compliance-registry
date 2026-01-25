@@ -1,0 +1,12 @@
+{
+  "id": "nft-marketplace-policy",
+  "type": "policy",
+  "name": "NFT Marketplace Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Compliance baseline for NFT marketplaces",
+    "required_kyc_policy": "default-kyc-policy",
+    "sanctions_policy": "sanctions-only-policy"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "id": "dao-contributor-policy",
+  "type": "policy",
+  "name": "DAO Contributor Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "KYC requirements for DAO contributors",
+    "required_kyc_policy": "default-kyc-policy",
+    "min_contribution_threshold_usd": 1000
+  }
+}
