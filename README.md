@@ -1,3 +1,34 @@
+# Solana Compliance Registry
+
+The **Solana Compliance Registry** is a public, versioned, machine‑readable catalog of compliance‑related metadata for the Solana ecosystem. It provides a unified, open standard for:
+
+- KYC providers  
+- AML rule sets  
+- Sanctions data providers  
+- Compliance policies  
+- Governance policies  
+- Audit artifacts  
+- Attestations and proofs  
+
+This registry enables wallets, dApps, DAOs, protocols, and infrastructure providers to adopt consistent, verifiable, and up‑to‑date compliance configurations.
+
+---
+
+## 🚀 Features
+
+- **Open, decentralized registry** of compliance metadata  
+- **JSON Schema–validated** entries  
+- **Versioned** with semantic versioning  
+- **SDKs** for JavaScript, Python, and Rust  
+- **CLI tool** for local inspection  
+- **Automated validation & index generation** via GitHub Actions  
+- **Static website** for browsing registry entries  
+- **Extensible** provider and policy library (20+ entries included)
+
+---
+
+## 📂 Repository Structure
+
 # Solana Compliance Registry README.md
 
 ## Solana-goverance-policy-engine 
