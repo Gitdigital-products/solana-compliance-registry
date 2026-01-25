@@ -1,0 +1,46 @@
+
+
+# Sequence diagram
+dApp loading a policy and its providers
+
+```txt
+Participant: dApp
+Participant: JS SDK
+Participant: File System
+Participant: Registry Entries
+
+dApp           JS SDK              File System              Registry Entries
+ |               |                      |                          |
+ |  new Client() |                      |                          |
+ |-------------> |                      |                          |
+ |               |  read registry.json  |                          |
+ |               |--------------------> |                          |
+ |               |   registry.json      |                          |
+ |               |<-------------------- |                          |
+ |               |                      |                          |
+ |  getEntry("default-kyc-policy")      |                          |
+ |------------------------------------> |                          |
+ |               |  find entry in index |                          |
+ |               |                      |                          |
+ |               |  read policies/...   |                          |
+ |               |--------------------> |                          |
+ |               |  policy JSON         |                          |
+ |               |<-------------------- |                          |
+ |               |                      |                          |
+ |  ← policy object                     |                          |
+ |<------------------------------------ |                          |
+ |               |                      |                          |
+ |  read accepted_providers[] from policy metadata                 |
+ |               |                      |                          |
+ |  for each provider id: getEntry(id)                             |
+ |------------------------------------> |                          |
+ |               |  read providers/...  |                          |
+ |               |--------------------> |                          |
+ |               |  provider JSON       |                          |
+ |               |<-------------------- |                          |
+ |               |                      |                          |
+ |  ← provider objects (array)          |                          |
+ |<------------------------------------ |                          |
+ |               |                      |                          |
+ dApp now has: policy + provider set for enforcement
+```
