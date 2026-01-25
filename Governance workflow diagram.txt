@@ -1,0 +1,49 @@
+# Governance workflow diagram
+PR → validation → review → merge → release
+
+`txt
+┌──────────────────────┐
+│  Contributor          │
+└─────────┬────────────┘
+          │
+          │  1. Fork & branch
+          │  2. Add/modify JSON entries
+          │  3. Run validate + generate-index
+          │  4. Push & open PR
+          ▼
+┌──────────────────────┐
+│  GitHub Pull Request  │
+└─────────┬────────────┘
+          │
+          │  CI: validate.yml
+          │  • Runs validate.ts
+          │  • Fails on schema errors
+          │
+          │  CI: generate-index.yml
+          │  • Ensures registry.json is up to date
+          ▼
+┌──────────────────────┐
+│  Maintainers          │
+│  • Review changes     │
+│  • Check neutrality   │
+│  • Check metadata     │
+└─────────┬────────────┘
+          │
+          │  Approve or request changes
+          ▼
+┌──────────────────────┐
+│  Merge to main        │
+└─────────┬────────────┘
+          │
+          │  CI: generate-index.yml (on push)
+          │  • Rebuilds registry.json
+          │
+          │  Optional: release.yml
+          │  • Creates tagged release
+          ▼
+┌──────────────────────┐
+│  Published Registry   │
+│  • Updated JSON files │
+│  • Updated registry   │
+│  • New release (opt.) │
+└──────────────────────┘
