@@ -1,0 +1,7 @@
+{
+  "attestor": "civic-kyc",
+  "subject": "wallet_address",
+  "timestamp": "2026-01-25T00:00:00Z",
+  "status": "verified",
+  "signature": "<base58>"
+}
