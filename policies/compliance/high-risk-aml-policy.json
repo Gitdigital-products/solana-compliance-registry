@@ -1,0 +1,13 @@
+{
+  "id": "high-risk-aml-policy",
+  "type": "policy",
+  "name": "High-Risk AML Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Enhanced AML for high-risk flows",
+    "required_rulesets": ["trmlabs-aml", "internal-risk-engine"],
+    "transaction_monitoring": true,
+    "enhanced_due_diligence": true
+  }
+}
