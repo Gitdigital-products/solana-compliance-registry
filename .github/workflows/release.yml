@@ -1,0 +1,14 @@
+name: Release Registry
+
+on:
+  workflow_dispatch:
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: zip -r registry.zip registry.json providers policies schema.json
+      - uses: softprops/action-gh-release@v2
+        with:
+          files: registry.zip
