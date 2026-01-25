@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Solana Compliance Registry Entry",
+  "type": "object",
+  "required": ["id", "type", "name", "version", "updated_at", "metadata"],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique slug identifier, e.g. 'civic-kyc' or 'chainalysis-aml'"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["kyc_provider", "aml_ruleset", "sanctions_provider", "policy", "audit", "attestation"],
+      "description": "Registry entry category"
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^v?[0-9]+\\.[0-9]+\\.[0-9]+$",
+      "description": "Semantic version"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "metadata": {
+      "type": "object",
+      "description": "Type-specific metadata",
+      "additionalProperties": true
+    },
