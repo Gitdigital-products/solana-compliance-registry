@@ -1,0 +1,12 @@
+{
+  "id": "default-aml-policy",
+  "type": "policy",
+  "name": "Default AML Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Baseline AML requirements for Solana dApps",
+    "required_rulesets": ["chainalysis-aml"],
+    "transaction_monitoring": true
+  }
+}
