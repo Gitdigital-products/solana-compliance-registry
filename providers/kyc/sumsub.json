@@ -1,0 +1,13 @@
+{
+  "id": "sumsub-kyc",
+  "type": "kyc_provider",
+  "name": "Sumsub",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "website": "https://sumsub.com",
+    "jurisdictions_supported": ["global"],
+    "verification_methods": ["document", "liveness", "address"],
+    "solana_integration": false
+  }
+}
