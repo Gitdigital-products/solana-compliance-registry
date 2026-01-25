@@ -1,0 +1,16 @@
+{
+  "name": "solana-compliance-registry-cli",
+  "version": "1.0.0",
+  "bin": {
+    "scr": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
