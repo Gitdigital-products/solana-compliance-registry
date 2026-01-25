@@ -1,0 +1,12 @@
+{
+  "id": "dao-treasury-signers-policy",
+  "type": "policy",
+  "name": "DAO Treasury Signers Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Enhanced checks for treasury signers",
+    "required_kyc_policy": "high-risk-kyc-policy",
+    "required_aml_policy": "high-risk-aml-policy"
+  }
+}
