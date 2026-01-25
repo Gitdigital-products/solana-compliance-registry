@@ -1,0 +1,24 @@
+{
+  "registry_version": "v1.0.0",
+  "generated_at": "2026-01-25T00:00:00Z",
+  "entries": [
+    {
+      "id": "civic-kyc",
+      "type": "kyc_provider",
+      "path": "providers/kyc/civic.json",
+      "version": "v1.0.0"
+    },
+    {
+      "id": "chainalysis-aml",
+      "type": "aml_ruleset",
+      "path": "providers/aml/chainalysis.json",
+      "version": "v1.0.0"
+    },
+    {
+      "id": "default-kyc-policy",
+      "type": "policy",
+      "path": "policies/compliance/default-kyc-policy.json",
+      "version": "v1.0.0"
+    }
+  ]
+}
