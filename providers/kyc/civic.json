@@ -1,0 +1,13 @@
+{
+  "id": "civic-kyc",
+  "type": "kyc_provider",
+  "name": "Civic Pass",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "website": "https://www.civic.com",
+    "jurisdictions_supported": ["US", "EU", "UK"],
+    "verification_methods": ["liveness", "document", "biometric"],
+    "solana_integration": true
+  }
+}
