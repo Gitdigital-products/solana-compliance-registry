@@ -1,0 +1,13 @@
+{
+  "id": "high-risk-kyc-policy",
+  "type": "policy",
+  "name": "High-Risk KYC Policy",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "description": "Enhanced KYC for high-risk users",
+    "minimum_age": 21,
+    "required_checks": ["identity", "liveness", "address"],
+    "accepted_providers": ["sumsub-kyc", "kycdao-kyc"]
+  }
+}
