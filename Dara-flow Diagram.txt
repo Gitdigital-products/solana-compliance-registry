@@ -1,0 +1,53 @@
+# Data‑flow diagram
+JSON → validation → index → SDK → apps
+
+```txt
+┌──────────────────────┐
+│  Registry Entries     │
+│  (JSON files)         │
+│                      │
+│  providers/           │
+│  policies/            │
+│  artifacts/           │
+└─────────┬────────────┘
+          │
+          │  (read all JSON files)
+          ▼
+┌──────────────────────┐
+│  validate.ts          │
+│  (AJV + schema.json)  │
+└─────────┬────────────┘
+          │
+          │  valid only
+          ▼
+┌──────────────────────┐
+│  generate-index.ts    │
+│  (build registry.json)│
+└─────────┬────────────┘
+          │
+          │  writes
+          ▼
+┌──────────────────────┐
+│   registry.json       │
+│   (index of entries)  │
+└─────────┬────────────┘
+          │
+          │  load
+          ▼
+┌───────────────────────────────────────────────┐
+│                  SDKs                         │
+│  • JS: ComplianceRegistryClient               │
+│  • Python: ComplianceRegistryClient           │
+│  • Rust: ComplianceRegistryClient             │
+└─────────┬────────────────────────────────────┘
+          │
+          │  consumed by
+          ▼
+┌───────────────────────────────────────────────┐
+│         Apps & Integrations                   │
+│  • Wallets                                    │
+│  • dApps                                      │
+│  • DAOs                                       │
+│  • Backends / Services                        │
+└───────────────────────────────────────────────┘
+```
