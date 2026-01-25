@@ -1,0 +1,11 @@
+{
+  "id": "trmlabs-sanctions",
+  "type": "sanctions_provider",
+  "name": "TRM Labs Sanctions",
+  "version": "v1.0.0",
+  "updated_at": "2026-01-25T00:00:00Z",
+  "metadata": {
+    "lists": ["OFAC", "UK", "EU"],
+    "refresh_interval_hours": 6
+  }
+}
