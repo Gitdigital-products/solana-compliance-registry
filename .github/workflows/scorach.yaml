@@ -1,0 +1,3 @@
+# Delegate capabilities to the `did` we created above.
+$ storacha delegation create did:key:z6Mk... -c space/blob/add -c space/index/add -c filecoin/offer -c upload/add --base64
+mAYIEAP8OEaJlcm9vdHOAZ3ZlcnNpb24BwwUBcRIg+oHTbzShh1WzBo9ISkonCW+KAcy/+zW8Zb...
