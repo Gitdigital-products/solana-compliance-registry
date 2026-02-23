@@ -1,0 +1,58 @@
+name: Extract Archives
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - "**/*.zip"
+      - "**/*.7z"
+      - "**/*.tar.gz"
+      - "**/*.tgz"
+      - "**/*.tar.bz2"
+      - "**/*.tar.xz"
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install archive tools
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y unzip p7zip-full p7zip-rar
+
+      - name: Extract ZIP files
+        run: |
+          find . -type f -name "*.zip" | while read file; do
+            echo "Extracting ZIP: $file"
+            dir=$(dirname "$file")
+            unzip -o "$file" -d "$dir"
+          done
+
+      - name: Extract 7Z files
+        run: |
+          find . -type f -name "*.7z" | while read file; do
+            echo "Extracting 7Z: $file"
+            dir=$(dirname "$file")
+            7z x "$file" -o"$dir" -y
+          done
+
+      - name: Extract TAR.GZ / TAR.BZ2 / TAR.XZ files
+        run: |
+          find . -type f \( -name "*.tar.gz" -o -name "*.tgz" -o -name "*.tar.bz2" -o -name "*.tar.xz" \) | while read file; do
+            echo "Extracting TAR archive: $file"
+            dir=$(dirname "$file")
+            tar -xf "$file" -C "$dir"
+          done
+
+      - name: Commit extracted files (optional)
+        if: github.event_name == 'workflow_dispatch'
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add .
+          git commit -m "Auto-extracted archives" || echo "No changes to commit"
+          git push
