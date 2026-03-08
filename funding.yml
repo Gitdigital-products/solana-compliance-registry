@@ -1,0 +1,15 @@
+⚙️ funding.yml (GitHub Sponsors Configuration)
+
+Place this file at:
+
+`
+.github/funding.yml
+`
+
+Paste this:
+
+`yaml
+github: RickCreator87
+buymea_coffee: rickcreator87
+custom: []
+`
